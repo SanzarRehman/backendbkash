@@ -44,4 +44,8 @@ return departmentService.fetchdeptbyid(departmentId);
 
     return departmentService.updatedpt(departmentID,department);
     }
+    @GetMapping("/departments/name/{name}")
+    public Department fetchDepartmentByName(@PathVariable("name") String departmentName) {
+        return departmentService.fetchDepartmentByName(departmentName);
+    }
 }
