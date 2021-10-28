@@ -1,12 +1,14 @@
 package com.example.sanzar.service;
 
 import com.example.sanzar.entity.Department;
+import com.example.sanzar.error.DepartmentNotFound;
 import com.example.sanzar.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -23,8 +25,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department fetchdeptbyid(Long departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department fetchdeptbyid(Long departmentId) throws DepartmentNotFound {
+        Optional<Department> department= departmentRepository.findById(departmentId);
+        if(!department.isPresent())
+        {
+            throw new DepartmentNotFound("Department not found");
+        }
+        return department.get();
     }
 
     @Override

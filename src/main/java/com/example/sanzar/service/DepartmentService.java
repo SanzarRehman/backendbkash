@@ -1,6 +1,7 @@
 package com.example.sanzar.service;
 
 import com.example.sanzar.entity.Department;
+import com.example.sanzar.error.DepartmentNotFound;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface DepartmentService {
 
     List<Department> fetchdepartmentlist();
 
-   public Department fetchdeptbyid(Long departmentId);
+   public Department fetchdeptbyid(Long departmentId) throws DepartmentNotFound;
 
     Department deletedpet(Long departmentID);
 
